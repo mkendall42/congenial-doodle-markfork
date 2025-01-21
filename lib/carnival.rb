@@ -1,12 +1,16 @@
 class Carnival
   attr_reader :name, :duration, :rides, :total_revenue
 
+  @@all_carnivals = []
+
   def initialize(name, duration)
     @name = name
     @duration = duration
 
     @rides = []
     @total_revenue = 0
+
+    @@all_carnivals << self     #For iteration 4
   end
 
   def add_ride(ride)
@@ -57,7 +61,14 @@ class Carnival
       summary_hash[:rides] << {ride: ride, riders: ride.rider_log.keys, total_revenue: ride.total_revenue}
     end
 
-    binding.pry
+    # binding.pry
 
   end
+
+  def self.total_revenues()
+    @@all_carnivals.sum do |carnival|
+      carnival.total_revenue()
+    end
+  end
+
 end
