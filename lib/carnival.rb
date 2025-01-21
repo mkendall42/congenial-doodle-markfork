@@ -32,4 +32,25 @@ class Carnival
       ride.total_revenue
     end
   end
+
+  def generate_summary_report()
+    summary_hash = {}
+    
+    # total unique visitors (store in array for other use later too):
+    all_visitors = @rides.map do |ride|
+      #Pull all riders, which would be each key:
+      ride.rider_log.keys
+    end.flatten.uniq
+    
+    summary_hash[:visitor_count] = all_visitors.length
+
+    summary_hash[:revenue_earned] = total_revenue()
+
+    #Visitor list
+
+
+
+    binding.pry
+
+  end
 end

@@ -98,5 +98,26 @@ RSpec.describe Carnival do
     expect(@carnival.total_revenue()).to eq(24)
   end
 
+  it "generates a complete summary hash of carnival information" do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
+
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride2.board_rider(@visitor3)
+    @ride3.board_rider(@visitor3)
+    @ride3.board_rider(@visitor4)
+    @ride3.board_rider(@visitor5)
+    @ride3.board_rider(@visitor5)
+
+    #Probably generate a hash at two different points to be sure
+    expect(@carnival.generate_summary_report()).to eq()
+
+
+    binding.pry
+
+  end
+
 
 end
