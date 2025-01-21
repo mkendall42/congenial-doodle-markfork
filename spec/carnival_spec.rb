@@ -47,30 +47,26 @@ RSpec.describe Carnival do
     @carnival.add_ride(@ride2)
     @carnival.add_ride(@ride3)
 
-    #Board a bunch of rides (exceptions noted):
     @ride1.board_rider(@visitor1)
     @ride1.board_rider(@visitor2)
     @ride1.board_rider(@visitor2)
-    @ride1.board_rider(@visitor4)     #3
+    @ride1.board_rider(@visitor4)     #3 total riders based on eligibility
     @ride2.board_rider(@visitor1)
     @ride2.board_rider(@visitor1)
     @ride2.board_rider(@visitor2)
     @ride2.board_rider(@visitor3)
-    @ride2.board_rider(@visitor3)     #4
+    @ride2.board_rider(@visitor3)     #4 total riders
     @ride3.board_rider(@visitor3)
     @ride3.board_rider(@visitor4)
     @ride3.board_rider(@visitor4)
     @ride3.board_rider(@visitor4)
-    @ride3.board_rider(@visitor4)     #5
-
-    # binding.pry
+    @ride3.board_rider(@visitor4)     #5 total riders
 
     expect(@carnival.most_popular_ride()).to eq(@ride3)
 
+    #Moneybags comes along to change up the numbers:
     @ride2.board_rider(@visitor5)
     @ride2.board_rider(@visitor5)
-
-    # binding.pry
 
     expect(@carnival.most_popular_ride()).to eq(@ride2)
   end
@@ -111,8 +107,7 @@ RSpec.describe Carnival do
     @ride3.board_rider(@visitor5)
     @ride3.board_rider(@visitor5)
 
-    #Probably generate a hash at two different points to be sure
-    #Whew...
+    #Yikes.  Am I a masochist?
     expected_summary_hash = {
       visitor_count: 5,
       revenue_earned: 15,
@@ -125,12 +120,10 @@ RSpec.describe Carnival do
               {ride: @ride2, riders: , total_revenue: },
               {ride: @ride3, riders: , total_revenue: }]
     }
-    expect(@carnival.generate_summary_report()).to eq()
-
+    expect(@carnival.generate_summary_report()).to eq(expected_summary_hash)
 
     binding.pry
 
   end
-
 
 end

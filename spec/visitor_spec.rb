@@ -1,5 +1,5 @@
 require './lib/visitor.rb'
-require './lib/ride.rb'     #Not ideal, but still stays within Law of Demeter (nearest neighbor)
+require './lib/ride.rb'     #Not ideal, but still stays within Law of Demeter (nearest neighbor only) and avoids external setting of instance vars
 
 RSpec.describe Visitor do
   before(:each) do
@@ -44,7 +44,7 @@ RSpec.describe Visitor do
   it "can pay admission fees for rides" do
     @visitor1.pay_fee(@ride1, 6)
     expect(@visitor1.spending_money).to eq(4)
-    #Either end up at 0 (not negative), or throw error (good board_ride() should catch this)
+    #Throw error if insufficient funds (though Ride#board_ride() should catch this)
     expect(@visitor1.pay_fee(@ride1, 6)).to eq(false)
     expect(@visitor1.spending_money).to eq(4)
   end
@@ -57,9 +57,6 @@ RSpec.describe Visitor do
     expect(@visitor1.rides_ridden).to eq({@ride1 => 2, @ride2 => 1})
     expect(@visitor1.favorite_ride()).to eq(@ride1)
     expect(@visitor1.money_spent()).to eq(8)
-
-    #If time: add more rides, and check hash / info again
   end
 
-  
 end

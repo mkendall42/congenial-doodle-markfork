@@ -1,6 +1,5 @@
 require './lib/visitor.rb'
 require './lib/ride.rb'
-require 'pry'
 
 RSpec.describe Ride do
   before(:each) do
@@ -62,9 +61,6 @@ RSpec.describe Ride do
     @ride1.board_rider(@visitor2)
     @ride1.board_rider(@visitor1)
     @ride1.board_rider(@visitor3)   #Doesn't like :gentle
-
-    # binding.pry
-
     @ride2.board_rider(@visitor1)
     @ride2.board_rider(@visitor2)   #Won't have enough money
     @ride3.board_rider(@visitor1)   #Doesn't like :thrilling
