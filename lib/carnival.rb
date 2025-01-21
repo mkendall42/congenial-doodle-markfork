@@ -21,4 +21,15 @@ class Carnival
     end
   end
 
+  def most_profitable_ride()
+    @rides.max do |ride1, ride2|
+      ride1.total_revenue <=> ride2.total_revenue
+    end
+  end
+
+  def total_revenue()
+    @rides.sum do |ride|
+      ride.total_revenue
+    end
+  end
 end

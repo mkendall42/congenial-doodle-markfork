@@ -20,6 +20,7 @@ RSpec.describe Carnival do
     @visitor3.add_preference(:thrilling)
     @visitor4.add_preference(:thrilling)
     @visitor5.add_preference(:gentle)
+    @visitor5.add_preference(:thrilling)
   end
 
   it "exists" do
@@ -62,16 +63,39 @@ RSpec.describe Carnival do
     @ride3.board_rider(@visitor4)
     @ride3.board_rider(@visitor4)     #5
 
-    binding.pry
+    # binding.pry
 
     expect(@carnival.most_popular_ride()).to eq(@ride3)
 
     @ride2.board_rider(@visitor5)
     @ride2.board_rider(@visitor5)
 
-    binding.pry
+    # binding.pry
 
     expect(@carnival.most_popular_ride()).to eq(@ride2)
+  end
+
+  it "can determine most profitable ride, and calculate total revenue for all rides" do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
+
+    #I'm getting tired of carefully tracking when a visitor runs of out cash, etc...so bring in 'ol Moneybags to help:
+    @ride1.board_rider(@visitor5)
+    @ride1.board_rider(@visitor5)
+    @ride2.board_rider(@visitor5)
+    @ride2.board_rider(@visitor5)
+    @ride3.board_rider(@visitor5)
+    @ride3.board_rider(@visitor5)
+    expect(@carnival.most_profitable_ride()).to eq(@ride2)
+
+    @ride3.board_rider(@visitor5)
+    @ride3.board_rider(@visitor5)
+    @ride3.board_rider(@visitor5)
+    @ride3.board_rider(@visitor5)
+    expect(@carnival.most_profitable_ride()).to eq(@ride3)
+
+    expect(@carnival.total_revenue()).to eq(24)
   end
 
 
