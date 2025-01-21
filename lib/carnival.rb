@@ -36,19 +36,26 @@ class Carnival
   def generate_summary_report()
     summary_hash = {}
     
-    # total unique visitors (store in array for other use later too):
+    #Find total unique visitors (store in array for other use later too):
     all_visitors = @rides.map do |ride|
-      #Pull all riders, which would be each key:
       ride.rider_log.keys
     end.flatten.uniq
-    
     summary_hash[:visitor_count] = all_visitors.length
 
     summary_hash[:revenue_earned] = total_revenue()
 
-    #Visitor list
+    #Construct visitor sub-array
+    summary_hash[:visitors] = []
+    all_visitors.each do |visitor|
+      #Favorite ride:
+      summary_hash[:visitors] << {visitor: visitor, favorite_ride: visitor.favorite_ride(), total_money_spent: visitor.money_spent()}
+    end
 
-
+    #Construct ride sub-array:
+    summary_hash[:rides] = []
+    @rides.each do |ride|
+      summary_hash[:rides] << {ride: ride, riders: ride.rider_log.keys, total_revenue: ride.total_revenue}
+    end
 
     binding.pry
 

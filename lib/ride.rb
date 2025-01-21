@@ -16,7 +16,7 @@ class Ride
     if visitor.tall_enough?(@min_height) && visitor.preferences.include?(@excitement) && visitor.spending_money >= @admission_fee
       rider_log[visitor] += 1
       #Also make the visitor pay up!  (And add to revenue)
-      visitor.pay_fee(@admission_fee)   #Should always return true given our test above (or could factor that in above directly)
+      visitor.pay_fee(self, @admission_fee)   #Should always return true given our test above (or could factor that in above directly)
       @total_revenue += @admission_fee
     end
   end

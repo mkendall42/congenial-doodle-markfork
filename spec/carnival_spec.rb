@@ -112,6 +112,19 @@ RSpec.describe Carnival do
     @ride3.board_rider(@visitor5)
 
     #Probably generate a hash at two different points to be sure
+    #Whew...
+    expected_summary_hash = {
+      visitor_count: 5,
+      revenue_earned: 15,
+      visitors: [{visitor: @visitor1, favorite_ride: @ride1, total_money_spent: 1},
+                {visitor: @visitor2, favorite_ride: @ride1, total_money_spent: 1},
+                {visitor: @visitor3, favorite_ride: @ride2, total_money_spent: 7},
+                {visitor: @visitor4, favorite_ride: @ride3, total_money_spent: 2},
+                {visitor: @visitor5, favorite_ride: @ride3, total_money_spent: 4}],
+      rides: [{ride: @ride1, riders: , total_revenue: },
+              {ride: @ride2, riders: , total_revenue: },
+              {ride: @ride3, riders: , total_revenue: }]
+    }
     expect(@carnival.generate_summary_report()).to eq()
 
 
