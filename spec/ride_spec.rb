@@ -1,5 +1,6 @@
 require './lib/visitor.rb'
 require './lib/ride.rb'
+require 'pry'
 
 RSpec.describe Ride do
   before(:each) do
@@ -54,9 +55,26 @@ RSpec.describe Ride do
     @ride3.board_rider(@visitor1)
     @ride3.board_rider(@visitor1)
     expect(@ride3.rider_log).to eq({@visitor1 => 2, @visitor3 => 1})
+  end
 
+  it "can determine total number of riders" do
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor3)   #Doesn't like :gentle
 
+    # binding.pry
 
+    @ride2.board_rider(@visitor1)
+    @ride2.board_rider(@visitor2)   #Won't have enough money
+    @ride3.board_rider(@visitor1)   #Doesn't like :thrilling
+    @ride3.board_rider(@visitor2)   #Not tall enough
+    @ride3.board_rider(@visitor3)   
+    @ride3.board_rider(@visitor3)
+
+    expect(@ride1.total_riders()).to eq(3)
+    expect(@ride2.total_riders()).to eq(1)
+    expect(@ride3.total_riders()).to eq(2)
   end
 
 end

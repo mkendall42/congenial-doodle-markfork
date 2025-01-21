@@ -21,9 +21,9 @@ class Ride
     end
   end
 
-  # def rider_log
-  #   #Generate a hash with visitor as key and # of times ridden as value
-  #   #Could just make in attr_reader really...
-  # end
-
+  def total_riders()
+    @rider_log.sum do |rider, count|
+      count
+    end
+  end
 end
