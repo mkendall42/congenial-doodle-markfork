@@ -14,7 +14,7 @@ RSpec.describe Visitor do
   it "initializes correctly" do
     expect(@visitor1.name).to eq("Bruce")
     expect(@visitor1.height).to eq(54)
-    expect(@visitor1.spending_money).to eq("$10")
+    expect(@visitor1.spending_money).to eq(10)
     expect(@visitor1.preferences).to eq([])
   end
 
@@ -36,6 +36,14 @@ RSpec.describe Visitor do
     expect(@visitor2.tall_enough?(54)).to eq(false)
     expect(@visitor3.tall_enough?(54)).to eq(true)
     expect(@visitor1.tall_enough?(64)).to eq(false)
+  end
+
+  it "can pay admission fees for rides" do
+    @visitor1.pay_fee(6)
+    expect(@visitor1.spending_money).to eq(4)
+    #Either end up at 0 (not negative), or throw error (good board_ride() should catch this)
+    expect(@visitor1.pay_fee(6)).to eq(false)
+    expect(@visitor1.spending_money).to eq(4)
   end
 
   
