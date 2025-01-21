@@ -9,6 +9,10 @@ class Visitor
     @preferences = []
   end
 
-  # def add_preferences
+  def add_preference(preference)
+    @preferences << preference
+  end
+
+  
 
 end

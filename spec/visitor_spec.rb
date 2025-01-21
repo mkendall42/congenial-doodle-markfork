@@ -3,6 +3,8 @@ require './lib/visitor.rb'
 RSpec.describe Visitor do
   before(:each) do
     @visitor1 = Visitor.new('Bruce', 54, '$10')
+    @visitor2 = Visitor.new('Tucker', 36, '$5')
+    @visitor3 = Visitor.new('Penny', 64, '$15')
   end
 
   it "exists" do
@@ -21,6 +23,16 @@ RSpec.describe Visitor do
     @visitor1.add_preference(:thrilling)
 
     expect(@visitor1.preferences).to eq([:gentle, :thrilling])
+
+    expect(@visitor2.preferences).to eq([])
+
+    @visitor2.add_preference(:agile)
+
+    expect(@visitor2.preferences).to eq([:agile])
+  end
+
+  it "can verify if visitor is tall enough for a given ride" do
+    
   end
 
   
