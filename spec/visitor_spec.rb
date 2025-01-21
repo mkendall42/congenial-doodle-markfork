@@ -32,7 +32,10 @@ RSpec.describe Visitor do
   end
 
   it "can verify if visitor is tall enough for a given ride" do
-    
+    expect(@visitor1.tall_enough?(54)).to eq(true)
+    expect(@visitor2.tall_enough?(54)).to eq(false)
+    expect(@visitor3.tall_enough?(54)).to eq(true)
+    expect(@visitor1.tall_enough?(64)).to eq(false)
   end
 
   

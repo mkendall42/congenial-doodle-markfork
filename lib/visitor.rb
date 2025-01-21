@@ -13,6 +13,8 @@ class Visitor
     @preferences << preference
   end
 
-  
+  def tall_enough?(threshold_height)
+    @height >= threshold_height
+  end  
 
 end
