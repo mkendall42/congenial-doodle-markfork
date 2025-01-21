@@ -13,8 +13,12 @@ class Ride
 
   def board_rider(visitor)
     #First, check if heigh is ok and thrill level?
-
-    rider_log[visitor] += 1
+    if visitor.tall_enough?(@min_height) && visitor.preferences.include?(@excitement) && visitor.spending_money >= @admission_fee
+      rider_log[visitor] += 1
+      #Also make the visitor pay up!  (And add to revenue)
+      visitor.pay_fee(@admission_fee)   #Should always return true given our test above (or could factor that in above directly)
+      @total_revenue += @admission_fee
+    end
   end
 
   # def rider_log
